@@ -16,7 +16,7 @@ export default function FilterBar({ filter, setFilter, counts }) {
           </button>
         ))}
       </div>
-      <p className="task-summary">{counts.active} active · {counts.completed} completed</p>
+      <p className="task-summary">{counts.active} active Â· {counts.completed} completed</p>
     </div>
   );
 }
