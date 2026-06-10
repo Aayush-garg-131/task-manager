@@ -129,10 +129,6 @@ Runs on http://localhost:5173
 Deployed on Netlify
 https://dulcet-tapioca-6a8ec9.netlify.app
 
-### Backend
-Deployed on Render
-https://task-manager-api-rpiw.onrender.com
-
 Note: The backend is on Render's free tier and may take 30 to 50 seconds to wake up on the first request. Just wait a moment and refresh.
 
 ---
