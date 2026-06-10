@@ -111,16 +111,6 @@ npm install
 cd ../client
 npm install
 
-### Run Backend
-cd server
-npm run dev
-Runs on http://localhost:5000
-
-### Run Frontend
-cd client
-npm run dev
-Runs on http://localhost:5173
-
 ---
 
 ## Deployment
