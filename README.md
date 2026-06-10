@@ -38,8 +38,9 @@ A full-stack task management application built with React, Vite, Node.js, and Ex
 - JSON file (data/tasks.json) — persists tasks across restarts
 
 ---
-
 ## Project Structure
+
+```text
 task-manager/
 │
 ├── client/
@@ -68,6 +69,8 @@ task-manager/
 │   └── package.json
 │
 └── README.md
+```
+
 
 ---
 
