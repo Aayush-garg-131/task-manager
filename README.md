@@ -1,179 +1,166 @@
-# Task Manager
+# Personal Task Manager
 
-A full-stack task management app I built as part of the Studio Graphene Full Stack Developer assessment. It lets you create, view, edit, delete, and filter tasks. Nothing fancy — just clean, working CRUD with a React frontend talking to a Node.js backend.
-
----
-
-## Live Demo
-
-- **Frontend:** https://dulcet-tapioca-6a8ec9.netlify.app
-- **Backend:** https://task-manager-api-rpiw.onrender.com
-
-> Note: The backend is hosted on Render's free tier, so it may take 30–50 seconds to wake up on the first request. Just wait a moment and refresh.
+A full-stack task management application built with React, Vite, Node.js, and Express.js. The application allows users to create, update, delete, and manage tasks through a modern and responsive user interface with an elegant pink and off-white design.
 
 ---
 
-## Which Exercise I Chose
+## Features
 
-I went with **Exercise 1: Personal Task Manager**. It felt like the right choice because I wanted to focus on getting the fundamentals solid — clean API design, proper state management, and a UI that actually works — rather than stretching thin across too many features.
+- Create new tasks with title, description, and due date
+- Edit existing tasks inline
+- Delete tasks with confirmation prompt
+- Mark tasks as completed or incomplete
+- Filter tasks by status — All, Active, Completed
+- Task count summary dashboard
+- Overdue task highlighting
+- Empty state UI for each filter
+- Loading and error states handled gracefully
+- Tasks persist across server restarts
+- Responsive modern UI
 
 ---
 
 ## Tech Stack
 
-| Layer | What I Used | Why |
-|-------|-------------|-----|
-| Backend | Node.js + Express | Simple to set up, great for REST APIs |
-| Frontend | React + Vite | Fast dev experience, hooks-based components |
-| Storage | JSON file | Keeps things simple without needing a DB |
-| Styling | Plain CSS | Full control, no extra dependencies |
-| Fonts | Playfair Display + Inter | Clean and professional look |
+### Frontend
+- React
+- Vite
+- JavaScript
+- CSS3
+- Google Fonts — Playfair Display + Inter
 
----
+### Backend
+- Node.js
+- Express.js
+- CORS
 
-## How to Run Locally
-
-You'll need Node.js 18+ installed. That's it.
-
-```bash
-# Clone the repo
-git clone https://github.com/Aayush-garg-131/task-manager.git
-cd task-manager
-
-# Start the backend
-cd server
-npm install
-npm run dev
-# Runs on http://localhost:5000
-
-# Open a new terminal, start the frontend
-cd ../client
-npm install
-npm run dev
-# Runs on http://localhost:5173
-```
-
-Open http://localhost:5173 in your browser and you're good to go.
-
----
-
-## API Documentation
-
-Base URL: `http://localhost:5000/api`
-
-### GET /tasks
-Get all tasks, sorted newest first.
-
-Optional query: `?status=active` or `?status=completed`
-
-```json
-[
-  {
-    "id": "uuid",
-    "title": "Buy groceries",
-    "description": "Milk and eggs",
-    "dueDate": "2026-06-15",
-    "completed": false,
-    "createdAt": 1717800000000
-  }
-]
-```
-
-### POST /tasks
-Create a new task.
-
-```json
-// Request body
-{ "title": "string (required)", "description": "string", "dueDate": "YYYY-MM-DD" }
-
-// Response: 201 with created task
-```
-
-### PUT /tasks/:id
-Update any field on a task. Send only what you want to change.
-
-```json
-// Request body — any of these
-{ "title": "updated title", "description": "...", "dueDate": "...", "completed": true }
-
-// Response: 200 with updated task
-```
-
-### PATCH /tasks/:id/toggle
-Flip the completed status.
-
-```json
-// Response: 200 with updated task
-```
-
-### DELETE /tasks/:id
-Delete a task.
-
-```json
-// Response: 200
-{ "message": "Task deleted", "task": { ... } }
-```
+### Storage
+- JSON file (data/tasks.json) — persists tasks across restarts
 
 ---
 
 ## Project Structure
-
 task-manager/
-├── server/
-│   ├── index.js              # Express setup, middleware, error handling
-│   ├── routes/
-│   │   └── tasks.js          # All 5 API endpoints
-│   └── data/
-│       └── tasks.json        # Where tasks are saved (auto-created)
 │
 ├── client/
+│   ├── public/
+│   │   └── _redirects
 │   └── src/
 │       ├── api/
-│       │   └── tasks.js      # All fetch() calls live here only
-│       ├── hooks/
-│       │   └── useTasks.js   # Custom hook — all task state in one place
+│       │   └── tasks.js
 │       ├── components/
-│       │   ├── TaskForm.jsx  # Add new task form
-│       │   ├── FilterBar.jsx # All / Active / Completed tabs
-│       │   ├── TaskList.jsx  # Task list + empty states
-│       │   └── TaskItem.jsx  # Single task with edit, toggle, delete
-│       ├── App.jsx           # Root component
-│       └── App.css           # All styles
+│       │   ├── TaskForm.jsx
+│       │   ├── TaskList.jsx
+│       │   ├── TaskItem.jsx
+│       │   └── FilterBar.jsx
+│       ├── hooks/
+│       │   └── useTasks.js
+│       ├── App.jsx
+│       ├── App.css
+│       └── main.jsx
+│
+├── server/
+│   ├── routes/
+│   │   └── tasks.js
+│   ├── data/
+│   │   └── tasks.json
+│   ├── index.js
+│   └── package.json
 │
 └── README.md
 
 ---
 
-## What Works
+## API Endpoints
 
-- Add a task with title (required), description, and due date
-- View all tasks sorted newest first
-- Mark tasks complete or incomplete with a checkbox
-- Inline edit — click Edit on any task to update it in place
-- Delete with a confirmation prompt so you don't accidentally lose something
-- Filter by All, Active, Completed with live counts
-- Overdue tasks get a red left border and a warning label
-- Empty state message changes based on which filter you're on
-- Loading spinner while the API call is in flight
-- Error banner with a Retry button if the backend is unreachable
-- Tasks saved to a JSON file so they survive server restarts
-- Responsive on mobile
+### Get All Tasks
 
----
+GET /api/tasks
+Optional query: `?status=active` or `?status=completed`
 
-## What I Would Do Next
+### Create Task
+POST /api/tasks
+Body: `{ "title": "string", "description": "string", "dueDate": "YYYY-MM-DD" }`
 
-Ran out of time on a few things I had in mind:
+### Update Task
+PUT /api/tasks/:id
+Body: any of `{ "title", "description", "dueDate", "completed" }`
 
-- **Search by title** — a search bar on the frontend with a `?search=` query param on the backend
-- **Drag and drop reordering** — I looked at `@dnd-kit/core` but didn't want to rush it
-- **SQLite instead of JSON** — the JSON file works fine but SQLite would be more robust for concurrent writes
-- **Tests** — I would write a couple of Jest tests for the API routes, at least the happy path and the 404 case
-- **Priority field** — Low / Medium / High with colour-coded badges would make the app more useful
+### Toggle Task Status
+PATCH /api/tasks/:id/toggle
+
+### Delete Task
+DELETE /api/tasks/:id
 
 ---
 
-## Honest Notes
+## Installation
 
-- I used Claude (AI) to help with boilerplate, the CSS styling, and to debug a PowerShell encoding issue that was corrupting my JSX files. All the logic and structure is mine and I understand every line — happy to walk through any part of it in the interview.
-- The backend sleeps on Render's free tier. First load might be slow. That's a hosting limitation, not a bug.
+### Clone Repository
+git clone https://github.com/Aayush-garg-131/task-manager.git
+cd task-manager
+
+### Install Backend Dependencies
+cd server
+npm install
+
+### Install Frontend Dependencies
+cd ../client
+npm install
+
+### Run Backend
+cd server
+npm run dev
+Runs on http://localhost:5000
+
+### Run Frontend
+cd client
+npm run dev
+Runs on http://localhost:5173
+
+---
+
+## Deployment
+
+### Frontend
+Deployed on Netlify
+https://dulcet-tapioca-6a8ec9.netlify.app
+
+### Backend
+Deployed on Render
+https://task-manager-api-rpiw.onrender.com
+
+Note: The backend is on Render's free tier and may take 30 to 50 seconds to wake up on the first request. Just wait a moment and refresh.
+
+---
+
+## Next Steps
+
+Given more time I would add:
+
+- Search tasks by title
+- Drag and drop reordering
+- Switch storage from JSON file to SQLite
+- Jest and Supertest tests for the API routes
+- Priority field with colour coded badges
+
+---
+
+## Author
+
+Aayush Garg
+B.Tech Student | Full Stack Development Enthusiast
+
+---
+
+## Learning Resources and References
+
+This project was developed as part of the Studio Graphene Full Stack Developer assessment. During development, I referred to various learning resources including:
+
+- Official React Documentation
+- Official Vite Documentation
+- Official Express.js Documentation
+- Node.js Documentation
+- MDN Web Docs
+
+These resources were used to understand concepts, project structure, API development, deployment, and frontend design patterns. The project was implemented, customized, and deployed independently as a hands-on learning exercise. AI tools were used to assist with boilerplate and debugging. All logic is understood and I am prepared to walk through any part of the code in the follow-up interview.
