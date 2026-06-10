@@ -151,7 +151,7 @@ Given more time I would add:
 
 ## Author
 
-Aayush Garg
+Aayush Garg |
 B.Tech Student | Full Stack Development Enthusiast
 
 ---
